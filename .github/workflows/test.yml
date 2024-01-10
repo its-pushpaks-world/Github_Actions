@@ -30,3 +30,17 @@ jobs:
           echo "World"
           node -v
           npm -v
+
+#By default jobs will run in parallel
+  parallel-job-macos:
+    runs-on: macos-latest #OS
+    steps:
+      - name: View version
+        run: sw_vers
+
+  dependent-job-windows:
+    runs-on: windows-latest
+    needs: run-shell-commands #single job or array of jobs [ job1, job2 ]
+    steps:
+      - name: Print data
+        run: echo "Hello from Windows"
